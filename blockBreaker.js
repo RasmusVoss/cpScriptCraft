@@ -1,4 +1,3 @@
-
 var dummy = ""
 var score = {};
 var vinderscore = 10;
@@ -40,6 +39,22 @@ function harDuVundet( event ){
 
 function startSpil(params, sender) {
   erSpilletStartet = "JA"
+  playerDrone = new  Drone(sender.location);
+  playerDrone.chkpt('trappestart')
+  var begynd = 0;
+  while (begynd < 20){
+    playerDrone.move('trappestart')
+    playerDrone.fwd(begynd)
+    var opSlut = 20
+    var op = 0
+    while (op < opSlut) {
+      playerDrone.box(109,1,1,1);
+      playerDrone.fwd(1);
+      playerDrone.up(1);
+      op++;
+    }
+    begynd++
+  }
 }
 
 command(startSpil, dummy);
