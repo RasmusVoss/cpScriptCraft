@@ -41,19 +41,17 @@ function startSpil(params, sender) {
   erSpilletStartet = "JA"
   playerDrone = new  Drone(sender.location);
   playerDrone.chkpt('trappestart')
-  var begynd = 0;
-  while (begynd < 20){
-    playerDrone.move('trappestart')
-    playerDrone.fwd(begynd)
-    var opSlut = 20
-    var op = 0
-    while (op < opSlut) {
-      playerDrone.box(109,1,1,1);
-      playerDrone.fwd(1);
-      playerDrone.up(1);
-      op++;
-    }
-    begynd++
+  playerDrone.move('trappestart')
+  var op = 0
+  while (op < 20) {
+    playerDrone.fwd(1)
+    playerDrone.chkpt('start')
+    playerDrone.box(110,1,1,1)
+    playerDrone.back(1+op+op)
+    playerDrone.box(110,1,1,1)
+    playerDrone.move('start')
+    playerDrone.up(1)
+    op++;
   }
 }
 

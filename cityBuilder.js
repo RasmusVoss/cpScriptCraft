@@ -1,9 +1,7 @@
 var here = "here"
+var params = 50
 var startPosition = "INGENTING"
 var tidSidenSidst = [];
-
-
-
 
 function bygArena(params, sender){
     materiale = 7 // Bedrock er nummer 7 bloacks.bedrock
@@ -40,6 +38,7 @@ function bygArena(params, sender){
 }
 
 function buildCity(params, sender){
+  echo (sender, params)
   if (startPosition == "INGENTING") {
     echo(sender, "start med at bruge /jsp setStart bummelum");
   } else {
@@ -112,15 +111,24 @@ function bygHus(location, materiale) {
   husDrone.prism0(134,4,8);
 }
 
-function bygAndet(location, materiale, hoejde, bredde) {
+function bygAndet(sender, materiale, hoejde, bredde, dybde) {
   var Drone = require('drone');
-  husDrone = new  Drone(location);
-  husDrone.box0(materiale, bredde, hoejde, 8);
+  husDrone = new  Drone(sender.location);
+  husDrone.box0(materiale, bredde, hoejde, dybde);
   husDrone.up(hoejde);
-  husDrone.prism0(134,bredde,8);
+  husDrone.prism0(134,bredde,dybde);
+}
+
+function bygnoget(params, sender) {
+  materiale = params[0];
+  hoejde = parseInt(params[1]);
+  bredde = parseInt(params[2]);
+  dybde = parseInt(params[3]);
+  bygAndet(sender, materiale, hoejde, bredde, dybde)
 }
 
 command(bygArena, here);
 command(givMig, here);
 command(buildCity, here);
 command(setStart, here);
+command(bygnoget, params);
